@@ -2,19 +2,46 @@ package Final_Project; // Folder in which my file is located
 
 import java.util.*; // Import the entire java util library
 
-import static org.junit.Assert.assertEquals; // Import junit assertEquals method as static
+import static org.junit.Assert.*; // Import junit assertEquals method as static
 import org.junit.Test; // Import Junit Test
+import static org.hamcrest.CoreMatchers.is; // Import is method 
 
 import Final_Project.ECommerce; // Import the main ECommerce java file
 
 public class ECommerceTest { // Initialize class named ECommerceTest
 
-    // @Test
-    // public void testAddProduct() {}  // NOTE: I don't think you can test a non-return method like in the ECommerce.addProduct() separately
+    @SuppressWarnings("deprecation") // Annotation for deprecation warnings from assertThat
+    @Test
+    public void testAddProduct() {
+        ECommerce eCommerce = new ECommerce(); // Initialize a new ECommerce object
+        eCommerce.addProduct("Notebook", 20, 30); // Initialize a test product named Notebook, quantity of 20, and price of 30
+        eCommerce.addProduct("Pen", 50, 10); // Initialize a test product named Pen, quantity of 50, and price of 10
+
+        // Creates an expected Inventory map
+        Map<String, Integer> expectedInventory = Map.of
+        (
+            "Notebook", 20,
+            "Pen", 50
+        );
+
+        double notebookPrice = 30; // placeholder
+        double penPrice = 10; // placeholder
+
+        // Creates an expected Price map
+        Map<String, Double> expectedPrice = Map.of
+        (
+            "Notebook", notebookPrice, 
+            "Pen", penPrice
+        );
+
+        assertThat(eCommerce.inventory, is(expectedInventory)); // Returns true when the ECommerce inventory matches the expected inventory
+        assertThat(eCommerce.prices, is(expectedPrice)); // Returns true when the ECommerce inventory matches the expected inventory
+
+    }
 
     @Test
     public void testApplyDiscount(){ // Create a Test method for the return method ECommerce.applyDiscount()
-        ECommerce eCommerce = new ECommerce();
+        ECommerce eCommerce = new ECommerce(); // Initialize a new ECommerce object
         eCommerce.addProduct("Notebook", 20, 30); // Initialize a test product named Notebook, quantity of 20, and price of 30
         eCommerce.addProduct("Pen", 50, 10); // Initialize a test product named Pen, quantity of 50, and price of 10
         eCommerce.addProduct("Eraser", 30, 15); // Initialize a test product named Eraser, quantity of 30, and price of 15

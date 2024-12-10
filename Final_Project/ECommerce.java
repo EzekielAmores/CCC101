@@ -3,8 +3,8 @@ package Final_Project; // Folder in which my file is located
 import java.util.*; // Import the entire java util library
 
 public class ECommerce { // Initialize class named ECommerce
-    private Map<String, Integer> inventory = new HashMap<>(); // Initialize invertory map/hashmap
-    private Map<String, Double> prices = new HashMap(); // Initialize price map/hashmap
+    public Map<String, Integer> inventory = new HashMap<>(); // Initialize invertory map/hashmap as public so that it is accessable when testing
+    public Map<String, Double> prices = new HashMap(); // Initialize price map/hashmap as public so that it is accessable when testing
 
     public void addProduct (String name, int quantity, double price) { // Create a non-return method for adding product
         inventory.put(name, quantity); // Stores a data in the inverntory map with key of name and value of quantity
